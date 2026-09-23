@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>html-slides 見本</title>
+<!-- 書き出し名（export.py の dist/<name>.pdf など）。無ければフォルダ名 -->
+<meta name="deck-export-name" content="html-slides-demo-slides">
+<!-- プレゼンツール本体は公開版 html-slides の deck/ を読む（v1 = 1.x の最新。固定したいときは v1.1.0 など）。
+     tools/serve.py で開くと手元の箱の deck/ に差し替えて配信するので、オフラインでも発表できる。
+     https://github.com/rintaro-chujo/html-slides -->
+<link rel="stylesheet" href="../v1/deck/deck.css">
+<style>
+/* この発表だけの上書きがあればここに書く（原則、空のまま） */
+</style>
+</head>
+<body>
+
+<div id="deck">
+
+<!-- html-slides スニペット集。templates/index.template.html の SLIDES の位置に貼って使う。data-min は予定分数、data-backup="1" は予備。
+     中身はすべて架空の例（研究・著者・数値は実在しない）。 -->
+
+<!-- ===== タイトル（枠つきテンプレ） ===== -->
+<section class="slide title" id="s-title" data-min="0.3">
+  <div class="card-t">
+    <div class="conf">Example Conference 2026</div>
+    <div class="logos"><img src="assets/logo-example.svg" alt="Example University"></div>
+    <h1>通知のタイミングは学習アプリの継続を変えるか<br>— 架空のオンライン実験による例 —</h1>
+    <div class="authors">
+      <div><div class="aff">Example University</div><div class="names"><span>山田 花子</span><span>佐藤 太郎</span></div></div>
+      <div><div class="aff">Sample Institute</div><div class="names"><span>Alex Smith</span></div></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>ノートは空行で段落を分ける。発表者ビューで直接編集でき、serve.py かブラウザ版ビューアで開いていれば index.html に書き戻される。</p>
+  </aside>
+</section>
+
+<!-- ===== つかみ：画像＋2行（タイトルなし） ===== -->
+<section class="slide" data-min="0.5">
+  <div class="body">
+    <div class="figure"><img src="assets/teaser-example.svg" alt="学習アプリの通知画面（例）" style="max-height:640px"></div>
+    <p class="lead center" style="margin-top:var(--gap-col)">毎晩21時に届く「今日の1問」の通知<br>その<span class="r">時刻</span>を変えるだけで、続く人は増えるのか</p>
+  </div>
+  <aside class="notes">
+    <p>つかみは実物の画像と2行だけ。タイトルは付けない。</p>
+  </aside>
+</section>
+
+<!-- ===== つかみ：カード左＋チャット右 ===== -->
+<section class="slide" data-min="0.4">
+  <div class="body">
+    <div class="two n23">
+      <div class="item">
+        <img src="assets/teaser-example.svg" alt="アプリ画面">
+        <div class="item-t">英単語 1日1問コース</div>
+        <div class="item-p">7日目 <span class="cap">連続記録</span></div>
+        <div class="cap">次の通知：21:00</div>
+      </div>
+      <div class="chat">
+        <div class="row"><div class="avatar"></div><div class="bubble other">今日の1問、まだ解いていませんよ<span class="orig">アプリからの通知</span></div></div>
+        <div class="row right"><div class="bubble draft">あとでやる…<span class="orig">あなたの心の声</span></div></div>
+        <div class="fragment" style="margin-top:28px">
+          <div class="modal">
+            <div class="lbl r">別の案</div>
+            <div class="txt sugg">帰りの電車（18:30）に届いていたら、その場で解いていたかもしれない。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>class="fragment" の要素は → キーで1つずつ出る。</p>
+  </aside>
+</section>
+
+<!-- ===== 絵文字＋一言（🤔 / ✨） ===== -->
+<section class="slide s-emoji" data-min="0.3">
+  <div class="body">
+    <div class="emoji">🤔</div>
+    <p class="st">通知は<span class="r">いつ</span>届けば、行動につながるのか？</p>
+  </div>
+  <aside class="notes"><p>問いを大きな一言で立てる。見出しは付けない。</p></aside>
+</section>
+
+<!-- ===== 2カラム＋パイプラインSVG＋インライン文献 ===== -->
+<section class="slide" data-min="0.7">
+  <h2>提案：行動の記録から通知時刻を決める</h2>
+  <div class="body">
+    <div class="two n32">
+      <div>
+        <ul>
+          <li>習慣は<span class="r">決まった文脈</span>の中で形成されやすい <span class="cap" style="white-space:nowrap">Example &amp; Sample, 2020</span></li>
+          <li>過去2週間の<span class="r">起動時刻</span>から、その人が開きやすい時間帯を推定</li>
+          <li>推定した時間帯の直前に通知し、反応がなければ翌日にずらす</li>
+        </ul>
+      </div>
+      <div class="figure"><svg viewBox="0 0 640 580" width="600" height="544" style="font-family:var(--font);font-weight:700">
+          <defs><marker id="ah2" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#333"/></marker></defs>
+          <g font-size="26" text-anchor="middle">
+            <rect x="170" y="20" width="300" height="70" rx="12" fill="#f4f4f4" stroke="#333" stroke-width="3"/><text x="320" y="65">起動ログ</text>
+            <rect x="120" y="140" width="400" height="70" rx="12" fill="#fff" stroke="#333" stroke-width="3"/><text x="320" y="185">① 時間帯の推定</text>
+            <rect x="120" y="260" width="400" height="70" rx="12" fill="#fff" stroke="#333" stroke-width="3"/><text x="320" y="305">② 通知時刻の決定</text>
+            <rect x="120" y="380" width="400" height="70" rx="12" fill="#fff" stroke="#333" stroke-width="3"/><text x="320" y="425">③ 反応の記録</text>
+            <rect x="20" y="500" width="180" height="60" rx="10" fill="#eee" stroke="#9a9a9a" stroke-width="3"/><text x="110" y="540" font-size="22">固定時刻</text>
+            <rect x="230" y="500" width="180" height="60" rx="10" fill="#fbeaea" stroke="#c00000" stroke-width="3"/><text x="320" y="540" font-size="22" fill="#c00000">個人化</text>
+            <rect x="440" y="500" width="180" height="60" rx="10" fill="#e6f0fa" stroke="#2b6cb0" stroke-width="3"/><text x="530" y="540" font-size="22" fill="#2b6cb0">ランダム</text>
+          </g>
+          <g stroke="#333" stroke-width="3" marker-end="url(#ah2)"><line x1="320" y1="90" x2="320" y2="138"/><line x1="320" y1="210" x2="320" y2="258"/><line x1="320" y1="330" x2="320" y2="378"/><line x1="320" y1="450" x2="110" y2="498"/><line x1="320" y1="450" x2="320" y2="498"/><line x1="320" y1="450" x2="530" y2="498"/></g>
+        </svg></div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>文献は使った箇所の直後に .cap で灰色小字。下部にまとめない。図は inline SVG で描く。</p>
+  </aside>
+</section>
+
+<!-- ===== 3枚の棒グラフ（data-chart JSON） ===== -->
+<section class="slide" data-min="0.9">
+  <h2>結果（架空）：個人化した時刻で継続日数が伸びる</h2>
+  <div class="body">
+    <div class="three">
+      <div data-chart='{"width":560,"height":640,"title":"継続日数（14日中）","groups":[{"label":"固定時刻","mean":6.2,"se":0.41,"color":"#9a9a9a"},{"label":"個人化","mean":8.1,"se":0.38,"color":"#c00000"},{"label":"ランダム","mean":5.9,"se":0.44,"color":"#2b6cb0"}],"ymin":0,"ymax":14,"step":2,"brackets":[{"from":0,"to":1,"label":"*","color":"#c00000"}]}'></div>
+      <div data-chart='{"width":560,"height":640,"title":"満足度（5件法）","groups":[{"label":"固定時刻","mean":3.6,"se":0.08,"color":"#9a9a9a"},{"label":"個人化","mean":3.8,"se":0.07,"color":"#c00000"},{"label":"ランダム","mean":3.4,"se":0.09,"color":"#2b6cb0"}],"ymin":1,"ymax":5,"brackets":[{"group":[0,2],"to":1,"label":"n.s."}]}'></div>
+      <div data-chart='{"width":560,"height":640,"title":"通知からの起動率","fmt":"pct","groups":[{"label":"固定時刻","mean":0.31,"se":0.02,"color":"#9a9a9a"},{"label":"個人化","mean":0.42,"se":0.02,"color":"#c00000"},{"label":"ランダム","mean":0.27,"se":0.02,"color":"#2b6cb0"}],"ymin":0,"ymax":0.6,"ticks":[0,0.2,0.4,0.6]}'></div>
+    </div>
+    <p class="foot">数値はすべて架空。平均±SE。<span class="r">brackets</span> で検定結果、<span class="r">group</span> で2本をまとめた計画対比</p>
+  </div>
+  <aside class="notes">
+    <p>data-chart の JSON から SVG の棒グラフを描く。groups に label・mean・se・color、軸は ymin・ymax・step・ticks、fmt:"pct" で百分率。</p>
+  </aside>
+</section>
+
+<!-- ===== 媒介モデル（inline SVG） ===== -->
+<section class="slide" data-min="0.9">
+  <h2>メカニズム（架空）：「ちょうどいい」感覚を介して効く</h2>
+  <div class="body">
+    <div class="figure">
+      <svg viewBox="0 0 1500 560" width="1500" height="560" xmlns="http://www.w3.org/2000/svg" style="font-family:var(--font);font-weight:700">
+        <defs><marker id="ah" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#111"/></marker>
+        <marker id="ahg" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill="#aaa"/></marker></defs>
+        <rect x="40" y="220" width="380" height="140" rx="18" fill="#fbeaea" stroke="#c00000" stroke-width="5"/>
+        <text x="230" y="278" text-anchor="middle" font-size="36" fill="#c00000" font-weight="900">個人化</text>
+        <text x="230" y="322" text-anchor="middle" font-size="26" fill="#555">（vs 固定時刻）</text>
+        <rect x="560" y="40" width="400" height="120" rx="18" fill="#fff" stroke="#111" stroke-width="5"/>
+        <text x="760" y="112" text-anchor="middle" font-size="36" font-weight="900">タイミングの適合感</text>
+        <rect x="1100" y="220" width="340" height="140" rx="18" fill="#fff" stroke="#111" stroke-width="5"/>
+        <text x="1270" y="302" text-anchor="middle" font-size="36" font-weight="900">継続日数</text>
+        <line x1="420" y1="250" x2="560" y2="120" stroke="#111" stroke-width="5" marker-end="url(#ah)"/>
+        <text x="455" y="130" text-anchor="end" font-size="32" fill="#c00000" font-weight="900">a = +.30 **</text>
+        <line x1="960" y1="110" x2="1100" y2="250" stroke="#111" stroke-width="5" marker-end="url(#ah)"/>
+        <text x="1050" y="140" font-size="32" fill="#c00000" font-weight="900">b = +.35 ***</text>
+        <line x1="420" y1="300" x2="1100" y2="300" stroke="#aaa" stroke-width="4" stroke-dasharray="14 12" marker-end="url(#ahg)"/>
+        <text x="760" y="340" text-anchor="middle" font-size="28" fill="#888">c′ = +.06, n.s.</text>
+        <text x="750" y="520" text-anchor="middle" font-size="26" fill="#333">間接効果（ブートストラップ・95%CI）：+.105 [+.041, +.178]　※架空の値</text>
+      </svg>
+    </div>
+    <p class="foot">実線＝有意な経路、破線＝直接効果（非有意）。係数と注記は SVG の text で書く</p>
+  </div>
+  <aside class="notes">
+    <p>媒介モデルやパイプラインは inline SVG で描く。色は黒・赤・灰だけ。</p>
+  </aside>
+</section>
+
+<!-- ===== 表（36px） ===== -->
+<section class="slide" data-min="0.4">
+  <h2>何を測ったか</h2>
+  <div class="body">
+    <table class="t">
+      <tr><th style="width:28%">指標</th><th>内容</th><th style="width:24%">用途</th></tr>
+      <tr><td><b>継続日数</b>（行動）</td><td>14日間のうち1問以上解いた日数</td><td>主要指標</td></tr>
+      <tr><td><b>起動率</b>（行動）</td><td>通知から30分以内にアプリを開いた割合</td><td>副次指標</td></tr>
+      <tr><td><b>満足度</b></td><td>「通知のタイミングに満足している」ほか3項目</td><td>副次指標</td></tr>
+    </table>
+    <p class="cap" style="margin-top:20px">質問紙は5件法</p>
+  </div>
+  <aside class="notes">
+    <p>表も本文と同じ 36px。小さくして詰めない。</p>
+  </aside>
+</section>
+
+<!-- ===== 章扉 ===== -->
+<section class="slide s-divider" data-backup="1">
+  <div class="body"><p class="lab">Appendix</p><p class="st">予備スライド</p></div>
+  <aside class="notes"><p>data-backup="1" のスライドは予備。予定時間の合計に入らない。</p></aside>
+</section>
+
+<!-- ===== 引用 ===== -->
+<section class="slide" data-backup="1">
+  <h2>参加者の声（架空）</h2>
+  <div class="body">
+    <div class="two t">
+      <div>
+        <p>事後インタビュー（n = 12）</p>
+        <ul>
+          <li>通知が<span class="r">生活の区切り</span>と重なると、解くきっかけになった</li>
+          <li>時刻がずれると、<span class="r">見ても後回し</span>にしがちだった</li>
+        </ul>
+      </div>
+      <div>
+        <div class="quote">「電車に乗った瞬間に来るのがちょうどよかった」<span class="who">参加者A</span></div>
+        <div class="quote">「夜に来ても、もう寝る準備をしている」<span class="who">参加者B</span></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">
+    <p>引用は論文本文に載っているものだけを使う。</p>
+  </aside>
+</section>
+
+
+</div>
+<script src="../v1/deck/deck.js"></script>
+</body>
+</html>
